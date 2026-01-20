@@ -1,111 +1,74 @@
-# CCPM Changelog
+# CCPM OpenCode Changelog
 
-## [2025-01-24] - Major Cleanup & Issue Resolution Release
+## [v1.0.0] - 2026-01-21 - OpenCode Migration Complete
 
-### 🎯 Overview
-Resolved 10 of 12 open GitHub issues, modernized command syntax, improved documentation, and enhanced system accuracy. This release focuses on stability, usability, and addressing community feedback.
+### Overview
+CCPM (Claude Code PM) を OpenCode 形式に完全移行。PRD → Epic → Issue → 並列実行のワークフローを OpenCode で利用可能に。
 
-### ✨ Added
-- **Local Mode Support** ([#201](https://github.com/automazeio/ccpm/issues/201))
-  - Created `LOCAL_MODE.md` with comprehensive offline workflow guide
-  - All core commands (prd-new, prd-parse, epic-decompose) work without GitHub
-  - Clear distinction between local-only vs GitHub-dependent commands
+### Added
+- **OpenCode コマンド形式** (Phase 2)
+  - 38個の PM コマンドを `.opencode/commands/` に移植
+  - コマンド名を `/pm:command` から `/pm-command` に変更
+  - `$ARGUMENTS` による引数処理対応
 
-- **Automatic GitHub Label Creation** ([#544](https://github.com/automazeio/ccpm/issues/544))
-  - Enhanced `init.sh` to automatically create `epic` and `task` labels
-  - Proper colors: `epic` (green #0E8A16), `task` (blue #1D76DB)  
-  - Eliminates manual label setup during project initialization
+- **OpenCode エージェント** (Phase 3)
+  - 4つの専門エージェントを `.opencode/agents/` に移植
+  - code-analyzer, file-analyzer, test-runner, parallel-worker
 
-- **Context Creation Accuracy Safeguards** ([#48](https://github.com/automazeio/ccpm/issues/48))
-  - Added mandatory self-verification checkpoints in context commands
-  - Implemented evidence-based analysis requirements
-  - Added uncertainty flagging with `⚠️ Assumption - requires verification`
-  - Enhanced both `/context:create` and `/context:update` with accuracy validation
+- **インストールスクリプト** (Phase 7)
+  - `install/add-ccpm.sh` - 既存プロジェクトへの追加
+  - `install/ccpm.sh` - 新規プロジェクト用
+  - `install/ccpm.bat` - Windows 用
 
-### 🔄 Changed
-- **Modernized Command Syntax** ([#531](https://github.com/automazeio/ccpm/issues/531))
-  - Updated 14 PM command files to use concise `!bash` execution pattern
-  - Simplified `allowed-tools` frontmatter declarations
-  - Reduced token usage and improved Claude Code compatibility
+- **日本語ドキュメント**
+  - `ja-docs/README_JA.md`
+  - `ja-docs/AGENTS_JA.md`
+  - `ja-docs/COMMANDS_JA.md`
 
-- **Comprehensive README Overhaul** ([#323](https://github.com/automazeio/ccpm/issues/323))
-  - Clarified PRD vs Epic terminology and definitions
-  - Streamlined workflow explanations and removed redundant sections
-  - Fixed installation instructions and troubleshooting guidance
-  - Improved overall structure and navigation
+### Changed
+- **ディレクトリ構造**
+  - `.claude/prds/` → `.ccpm/prds/`
+  - `.claude/epics/` → `.ccpm/epics/`
+  - `.claude/commands/pm/` → `.opencode/commands/`
+  - `.claude/agents/` → `.opencode/agents/`
+  - `CLAUDE.md` → `AGENTS.md`
 
-### 📋 Research & Community Engagement
-- **Multi-Tracker Support Analysis** ([#200](https://github.com/automazeio/ccpm/issues/200))
-  - Researched CLI availability for Linear, Trello, Azure DevOps, Jira
-  - Identified Linear as best first alternative to GitHub Issues
-  - Provided detailed implementation roadmap for future development
+- **設定ファイル**
+  - `claude.json` → `opencode.json`
 
-- **GitLab Support Research** ([#588](https://github.com/automazeio/ccpm/issues/588))  
-  - Confirmed strong `glab` CLI support for GitLab integration
-  - Invited community contributor to submit existing GitLab implementation as PR
-  - Updated project roadmap to include GitLab as priority platform
+- **ルールファイル** (Phase 4)
+  - 11個のルールを `.ccpm/rules/` に移植
+  - パス参照を `.ccpm/` 形式に更新
 
-### 🐛 Clarified Platform Limitations
-- **Windows Shell Compatibility** ([#609](https://github.com/automazeio/ccpm/issues/609))
-  - Documented as Claude Code platform limitation (requires POSIX shell)
-  - Provided workarounds and alternative solutions
+- **スクリプト** (Phase 5)
+  - 18個のシェルスクリプトを `.ccpm/` パス対応に更新
+  - `scripts/pm/` に PM 関連スクリプトを整理
 
-- **Codex CLI Integration** ([#585](https://github.com/automazeio/ccpm/issues/585))
-  - Explained future multi-AI provider support in new CLI architecture
+### Removed
+- 中国語ドキュメント (`zh-docs/`, `doc/`)
+- 旧 Claude Code 形式のファイル参照
 
-- **Parallel Worker Agent Behavior** ([#530](https://github.com/automazeio/ccpm/issues/530))
-  - Clarified agent role as coordinator, not direct coder
-  - Provided implementation guidance and workarounds
+### QA Results (Phase 8)
+- PRD 作成: PASS
+- Epic 変換: PASS
+- GitHub 同期: PASS (Issues #6-#9)
+- エラーハンドリング: PASS
 
-### 🔒 Security
-- **Privacy Documentation Fix** ([#630](https://github.com/automazeio/ccpm/issues/630))
-  - Verified resolution via PR #631 (remove real repository references)
-
-### 💡 Proposed Features
-- **Bug Handling Workflow** ([#654](https://github.com/automazeio/ccpm/issues/654))
-  - Designed `/pm:attach-bug` command for automated bug tracking
-  - Proposed lightweight sub-issue integration with existing infrastructure
-  - Community feedback requested on implementation approach
-
-### 📊 Issues Resolved
-**Closed**: 10 issues  
-**Active Proposals**: 1 issue (#654)  
-**Remaining Open**: 1 issue (#653)
-
-#### Closed Issues:
-- [#630](https://github.com/automazeio/ccpm/issues/630) - Privacy: Remove real repo references ✅  
-- [#609](https://github.com/automazeio/ccpm/issues/609) - Windows shell error (platform limitation) ✅
-- [#585](https://github.com/automazeio/ccpm/issues/585) - Codex CLI compatibility (architecture update) ✅  
-- [#571](https://github.com/automazeio/ccpm/issues/571) - Figma MCP support (platform feature) ✅
-- [#531](https://github.com/automazeio/ccpm/issues/531) - Use !bash in custom slash commands ✅
-- [#323](https://github.com/automazeio/ccpm/issues/323) - Improve README.md ✅
-- [#201](https://github.com/automazeio/ccpm/issues/201) - Local-only mode support ✅
-- [#200](https://github.com/automazeio/ccpm/issues/200) - Multi-tracker support research ✅  
-- [#588](https://github.com/automazeio/ccpm/issues/588) - GitLab support research ✅
-- [#48](https://github.com/automazeio/ccpm/issues/48) - Context creation inaccuracies ✅
-- [#530](https://github.com/automazeio/ccpm/issues/530) - Parallel worker coding operations ✅
-- [#544](https://github.com/automazeio/ccpm/issues/544) - Auto-create labels during init ✅
-- [#947](https://github.com/automazeio/ccpm/issues/947) - Project roadmap update ✅
-
-### 🛠️ Technical Details
-- **Files Modified**: 16 core files + documentation
-- **New Files**: `LOCAL_MODE.md`, `CONTEXT_ACCURACY.md`  
-- **Commands Updated**: All 14 PM slash commands modernized
-- **Backward Compatibility**: Fully maintained
-- **Dependencies**: No new external dependencies added
-
-### 🏗️ Project Health
-- **Issue Resolution Rate**: 83% (10/12 issues closed)
-- **Documentation Coverage**: Significantly improved
-- **Community Engagement**: Active contributor invitation and feedback solicitation
-- **Code Quality**: Enhanced accuracy safeguards and validation
-
-### 🚀 Next Steps
-1. Community feedback on bug handling proposal (#654)
-2. GitLab integration PR review and merge
-3. Linear platform integration (pending demand)
-4. Enhanced testing and validation workflows
+### Migration Phases
+| Phase | 内容 | 状態 |
+|-------|------|------|
+| Phase 0 | 準備（変換ルール確定） | COMPLETE |
+| Phase 1 | 基盤構築 | COMPLETE |
+| Phase 2 | コマンド移植（38本） | COMPLETE |
+| Phase 3 | エージェント移植（4つ） | COMPLETE |
+| Phase 4 | ルール移植（11本） | COMPLETE |
+| Phase 5 | スクリプト移植（18本） | COMPLETE |
+| Phase 6 | ドキュメント更新 | COMPLETE |
+| Phase 7 | 配布準備 | COMPLETE |
+| Phase 8 | QA | COMPLETE |
 
 ---
 
-*This release represents a major stability and usability milestone for CCPM, addressing the majority of outstanding community issues while establishing a foundation for future multi-platform support.*
+## Previous Releases (Original CCPM)
+
+See [automazeio/ccpm](https://github.com/automazeio/ccpm) for the original Claude Code version changelog.

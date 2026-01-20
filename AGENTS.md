@@ -1,6 +1,6 @@
 # Agents
 
-**[中文文档 (Chinese Documentation)](doc/AGENTS_ZH.md)**
+**[日本語ドキュメント (Japanese Documentation)](ja-docs/AGENTS_JA.md)**
 
 Specialized agents that do heavy work and return concise summaries to preserve context.
 
