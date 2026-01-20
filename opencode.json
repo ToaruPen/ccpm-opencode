@@ -1,0 +1,28 @@
+{
+  "$schema": "https://opencode.ai/config.schema.json",
+  "instructions": [
+    "Follow the rules in .ccpm/rules/ for all PM operations",
+    "Use ISO 8601 UTC format for all timestamps (see .ccpm/rules/datetime.md)",
+    "PRD files are stored in .ccpm/prds/",
+    "Epic and task files are stored in .ccpm/epics/",
+    "Project context is stored in .ccpm/context/"
+  ],
+  "agents": {
+    "code-analyzer": {
+      "instructions": ".opencode/agents/code-analyzer.md",
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+    "file-analyzer": {
+      "instructions": ".opencode/agents/file-analyzer.md",
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+    "test-runner": {
+      "instructions": ".opencode/agents/test-runner.md",
+      "model": "anthropic/claude-sonnet-4-5"
+    },
+    "parallel-worker": {
+      "instructions": ".opencode/agents/parallel-worker.md",
+      "model": "anthropic/claude-sonnet-4-5"
+    }
+  }
+}

@@ -105,10 +105,35 @@ New agents should follow these principles:
 
 Agents integrate seamlessly with the PM command system:
 
-- `/pm:issue-analyze` → Identifies work streams
-- `/pm:issue-start` → Spawns parallel-worker agent
+- `/pm-issue-analyze` → Identifies work streams
+- `/pm-issue-start` → Spawns parallel-worker agent
 - parallel-worker → Spawns multiple sub-agents
 - Sub-agents → Work in parallel in the worktree
 - Results → Consolidated back to main thread
 
 This creates a hierarchy that maximizes parallelism while preserving context at every level.
+
+## OpenCode Configuration
+
+Agents are defined in `.opencode/agents/` and configured in `opencode.json`:
+
+```
+.opencode/
+├── agents/
+│   ├── code-analyzer.md
+│   ├── file-analyzer.md
+│   ├── test-runner.md
+│   └── parallel-worker.md
+└── commands/
+    └── pm-*.md
+```
+
+Data files are stored in `.ccpm/`:
+
+```
+.ccpm/
+├── prds/          # Product Requirements Documents
+├── epics/         # Epic and task files
+├── context/       # Project context
+└── rules/         # Operation rules
+```
