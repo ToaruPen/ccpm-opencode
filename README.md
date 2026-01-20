@@ -99,15 +99,21 @@ project-root/
 
 ### Installation (2 minutes)
 
-1. **Clone or copy CCPM into your project**:
+1. **Install CCPM into your project**:
    ```bash
-   # Option 1: Clone and copy
-   git clone https://github.com/YOUR_ORG/ccpm-opencode.git /tmp/ccpm
+   # Option 1: Add to existing project (recommended)
+   cd your-project
+   curl -fsSL https://raw.githubusercontent.com/ToaruPen/CCPM-OpenCode/main/install/add-ccpm.sh | bash
+   
+   # Option 2: New project with full installation
+   mkdir my-project && cd my-project
+   curl -fsSL https://raw.githubusercontent.com/ToaruPen/CCPM-OpenCode/main/install/ccpm.sh | bash
+   
+   # Option 3: Manual clone and copy
+   git clone https://github.com/ToaruPen/CCPM-OpenCode.git /tmp/ccpm
    cp -r /tmp/ccpm/.opencode /tmp/ccpm/.ccpm /tmp/ccpm/scripts .
    cp /tmp/ccpm/opencode.json /tmp/ccpm/AGENTS.md .
-   
-   # Option 2: Use install script (when available)
-   curl -fsSL https://example.com/ccpm/install | bash
+   rm -rf /tmp/ccpm
    ```
 
 2. **Initialize the PM system**:
