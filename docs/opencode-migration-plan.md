@@ -200,10 +200,15 @@ ccpm は元々 Claude Code 向けに設計された PM システム。OpenCode �
 - [x] docs/migration-from-claude-code.md 作成
 - [x] インストールスクリプト作成
 
-### Phase 7: 配布準備（8-12時間）
-- [ ] インストールスクリプト（curl | bash）
-- [ ] サンプルプロジェクト作成
-- [ ] GitHub リポジトリ設定
+### Phase 7: 配布準備（8-12時間） - COMPLETE
+- [x] インストールスクリプト（curl | bash）
+  - [x] ccpm.sh（新規プロジェクト用）
+  - [x] add-ccpm.sh（既存プロジェクト追加用）
+  - [x] ccpm.bat（Windows用）
+- [x] install/README.md 更新
+- [x] README.md の URL 更新
+- [ ] サンプルプロジェクト作成 → スキップ（不要と判断）
+- [ ] GitHub リポジトリ設定 → リリース後に実施
 
 ### Phase 8: QA（8-14時間）
 - [ ] PRD → Epic → Issue の一連フロー検証
