@@ -4,6 +4,8 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-28a745)](LICENSE)
 
+**[日本語ドキュメント (Japanese Documentation)](ja-docs/README_JA.md)**
+
 ### A spec-driven development workflow using PRDs, GitHub issues, Git worktrees, and parallel AI agents.
 
 Stop losing context. Stop blocking on tasks. Stop shipping bugs. This battle-tested system turns PRDs into epics, epics into GitHub issues, and issues into production code - with full traceability at every step.
